@@ -1,3 +1,4 @@
+#!/bin/bash
 gcc -E $CFILE -o c
 /**
 *The -E option causes gcc to run the preprocessor, displ*ay the expanded output, and then exit without compiling *the resulting source code.
