@@ -1,0 +1,4 @@
+pointers and arrays
+strcat is used to concatenate strings
+strcat_s s for sizeof() is a safer function'
+strncat n stands for numbers to be copied (str1, str2, 9);
