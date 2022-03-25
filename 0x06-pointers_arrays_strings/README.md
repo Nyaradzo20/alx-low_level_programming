@@ -17,3 +17,4 @@ dest − This is the pointer to the destination array where the content is to be
 src − This is the string to be copied.
 
 n − The number of characters to be copied from source.
+5...lowercase Check the each ASCII value of the string is in the range between 97 to 122(lowercase alphabets range).If the character is in lower case then subtract 32 from its ASCII value, then the character will be converted into upper case.
