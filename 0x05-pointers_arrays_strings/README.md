@@ -24,3 +24,13 @@ FYI: The standard library provides a similar function: puts. Run man puts to lea
 Prototype: void print_rev(char *s);
 So first you use the ford loop to find the length
 loop through the length and -1 for the null char and decrement length ---
+5>>>>/***TO BE UPDATED***/
+
+
+
+
+6>>>Write a function that prints every other character of a string, starting with the first character, followed by a new line.
+
+Prototype: void puts2(char *str);
+OK  LOL I NEVER EXPECTED THIS ONE TO WORK BUT IT DID!!
+i declared the length variable ,looped through thr string kusvika panull charactere;but i incremented *2 instead of length ++ i used length +=2
