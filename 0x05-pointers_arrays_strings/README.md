@@ -19,4 +19,8 @@ length will keep on looping through the string and will only stop when it gets t
 Prototype: void _puts(char *str);
 FYI: The standard library provides a similar function: puts. Run man puts to learn more.
 -used the same code from number 2,i just added _putchar (str[length]) for printing purposes
-                                                       
+
+4>>>Write a function that prints a string, in reverse, followed by a new line.
+Prototype: void print_rev(char *s);
+So first you use the ford loop to find the length
+loop through the length and -1 for the null char and decrement length ---
