@@ -9,3 +9,14 @@ so you create a a new variable that will be udes in the swapping process
  int *b =  c /*b is now = 98*/
 
 2>>>check the length of a string
+-use a for loop because the wile loop is giving me a segmentation core dumped error.
+i initialised the length variable which will go through the whole string ;
+for(length = 0; s[length] != '\0'; length ++);
+return length;
+length will keep on looping through the string and will only stop when it gets to the null character....
+
+3>>>Write a function that prints a string, followed by a new line, to stdout.
+Prototype: void _puts(char *str);
+FYI: The standard library provides a similar function: puts. Run man puts to learn more.
+-used the same code from number 2,i just added _putchar (str[length]) for printing purposes
+                                                       
