@@ -34,3 +34,12 @@ loop through the length and -1 for the null char and decrement length ---
 Prototype: void puts2(char *str);
 OK  LOL I NEVER EXPECTED THIS ONE TO WORK BUT IT DID!!
 i declared the length variable ,looped through thr string kusvika panull charactere;but i incremented *2 instead of length ++ i used length +=2
+
+7...Write a function that prints half of a string, followed by a new line.
+Prototype: void puts_half(char *str);
+The function should print the second half of the string
+If the number of characters is odd, the function should print the last n characters of the string, where n = (length_of_the_string - 1) / 2
+>>got this one after a long time ok, so i  declared the variables length,counter and mid
+used len to loop through the string to find the length
+found the len then used the if atatement
+if the number is odd ie n % 2  != 0 then the last characters shpud be printed,i checked if the numbers were odd and they were so i used a for loop  then started running the loop from the middle of the loop ie counter = mid then i printed the odd numbers....
