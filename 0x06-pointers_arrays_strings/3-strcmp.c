@@ -10,12 +10,13 @@
 */
 int _strcmp(char *s1, char *s2)
 {
-int compar;
-while(*s1 && *s2 != '\0')
+int counter, cmpVal;
+counter = 0;
+while (s1[counter] == s2[counter] && s1[counter] != '\0')
 {
-s1++;
-s2++;
+counter++;
 }
-compar = *s1 - *s2;
-return(compar);
+
+cmpVal = s1[counter] - s2[counter];
+return (cmpVal);
 }
