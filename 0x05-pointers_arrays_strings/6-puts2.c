@@ -1,8 +1,9 @@
 #include "main.h"
+
 /**
-*puts2 - print pair values.
-*@str: value to be evaluate.
-*Return: not.
+* _strlen - returns the length of a string
+* @s: string
+* Return: length
 */
 int _strlen(char *s)
 {
