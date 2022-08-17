@@ -4,12 +4,29 @@
 *@str: value to be evaluate.
 *Return: not.
 */
+int _strlen(char *s)
+{
+int len = 0;
+while (*s != '\0')
+{
+len++;
+s++;
+}
+
+return (len);
+}
+
+/**
+* puts2 - prints every second character of a string, followed by a new line
+* @str: string to print
+*/
+
 void puts2(char *str)
 {
-int len;
-for (len = 0; str[len] != '\0'; len += 2)
-{
-_putchar(str[len]);
-}
+int i;
+
+for (i = 0; str[i] != '\0' && i < _strlen(str); i += 2)
+_putchar(str[i]);
+
 _putchar('\n');
 }
