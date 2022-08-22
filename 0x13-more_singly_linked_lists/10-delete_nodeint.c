@@ -44,9 +44,3 @@ tmp->next = (tmp->next)->next;
 free(tmp2);
 
 return (1);
-}
-© 2021 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
