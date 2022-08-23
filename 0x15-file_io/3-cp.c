@@ -1,70 +1,86 @@
 #include "main.h"
-
+void cant_write(char *s);
+void cant_read(char *s);
 /**
-* __exit - prints error messages and exits with exit value
-* @error: num is either exit value or file descriptor
-* @s: str is a name, either of the two filenames
-* @fd: file descriptor
-* Return: 0 on success
-**/
-int __exit(int error, char *s, int filedes)
-{
-switch (error)
-{
-case 97:
-dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
-exit(error);
-case 98:
-dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", s);
-exit(error);
-case 99:
-dprintf(STDERR_FILENO, "Error: Can't write to %s\n", s);
-exit(error);
-case 100:
-dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", filedes);
-exit(error);
-default:
-return (0);
-}
-}
-
-/**
-* main - copies one file to another
-* @argc: should be 3 (./a.out copyfromfile copytofile)
-* @argv: first is file to copy from (filedes_1), second is file to copy to (filedes_2)
-* Return: 0 (success), 97-100 (exit value errors)
+* main - entry point!
+* @s: string to read/writey
+*
+* Description: cp file_from file_to
+* Return: Always 0
 */
 int main(int argc, char *argv[])
 {
-int filedes_1, filedes_2, new_read, new_wrote;
-char *buffer[1024];
+	char *buff[1024];
+	int fd1, fd2;
+	ssize_t rd, wr;
 
-if (argc != 3)
-__exit(97, NULL, 0);
+	if (argc != 3)
+	{
+		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
+		exit(97);
+	}
+	if (argv[1] == NULL)
+	{
+		cant_read(argv[1]);
+		exit(98);
+	}
+	fd1 = open(argv[1], O_RDONLY);
+	if (fd1 == -1)
+		cant_read(argv[1]);
 
-/*sets file descriptor for copy-to file*/
-filedes_2 = open(argv[2], O_CREAT | O_TRUNC | O_WRONLY, 0664);
-if (filedes_2 == -1)
-__exit(99, argv[2], 0);
+	fd2 = open(argv[1], O_WRONLY | O_CREAT | O_TRUNC, 0664);
+	if (fd2 == -1)
+		cant_write(argv[2]);
 
-/*sets file descriptor for copy-from file*/
-filedes_1 = open(argv[1], O_RDONLY);
-if (filedes_1 == -1)
-__exit(98, argv[1], 0);
+	rd = read(fd1, buff, 1024);
+	if (rd == -1)
+		cant_read(argv[1]);
 
-/*reads original file as long as there's more than 0 to read*/
-/*copies/writes contents into new file */
-while ((new_read = read(filedes_1, buffer, 1024)) != 0)
-{
-if (new_read == -1)
-__exit(98, argv[1], 0);
-
-new_wrote = write(filedes_2, buffer, new_read);
-if (new_wrote == -1)
-__exit(99, argv[2], 0);
+	wr = write(fd2, buff, rd);
+	if (wr == -1)
+		cant_write(argv[2]);
+	while (rd == 1024)
+	{
+		rd = read(fd1, buff, 1024);
+		if (rd == -1)
+			cant_read(argv[1]);
+		wr = write(fd2, buff, rd);
+		if (wr == 1)
+			cant_write(argv[2]);
+	}
+	if (close(fd1) < 0)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd1);
+		exit(100);
+	}
+	if (close(fd2) < 0)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd2);
+		exit(100);
+	}
+	return (0);
 }
-
-close(filedes_2) == -1 ? (__exit(100, NULL, filedes_2)) : close(filedes_2);
-close(filedes_1) == -1 ? (__exit(100, NULL, filedes_1)) : close(filedes_1);
-return (0);
+/**
+* cant_read - function
+* @s: string to read
+*
+* Description: error function if unable to read
+* Return: 0
+*/
+void cant_read(char *s)
+{
+	dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", s);
+	exit(98);
+}
+/**
+* cant_write - function
+* @s: string to write
+*
+* Description: error func if unable to write
+* Return: 0
+*/
+void cant_write(char *s)
+{
+	dprintf(STDERR_FILENO, "Error: Can't write to %s\n", s);
+	exit(99);
 }
