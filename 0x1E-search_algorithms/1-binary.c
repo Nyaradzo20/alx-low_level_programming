@@ -1,51 +1,39 @@
 #include "search_algos.h"
 
 /**
- * print_arr - helper func to print array everytime array is halved
- * @array: array
- * @l: left index of original array
- * @r: right index of original array
- */
-void print_arr(int *array, size_t l, size_t r)
-{
-	size_t i = 0;
-
-	printf("Searching in array: ");
-	for (i = l; i <= r; i++)
-	{
-		if (i != r)
-			printf("%d, ", array[i]);
-		else
-			printf("%d\n", array[i]);
-	}
-}
-
-/**
- * binary_search - search mids
- * @array: given array of ints
- * @size: size of array
- * @value: value to search for
- * Return: index at which value's found
- */
+  * binary_search - Searches for a value in a sorted array
+  *                 of integers using binary search.
+  * @array: A pointer to the first element of the array to search.
+  * @size: The number of elements in the array.
+  * @value: The value to search for.
+  *
+  * Return: If the value is not present or the array is NULL, -1.
+  *         Otherwise, the index where the value is located.
+  *
+  * Description: Prints the [sub]array being searched after each change.
+  */
 int binary_search(int *array, size_t size, int value)
 {
-	size_t mid = 0;
-	size_t l = 0;
-	size_t r = size - 1;
+	size_t i, left, right;
 
-	if (!array)
+	if (array == NULL)
 		return (-1);
 
-	while (l <= r)
+	for (left = 0, right = size - 1; right >= left;)
 	{
-		print_arr(array, l, r);
-		mid = (l + r) / 2;
-		if (array[mid] == value)
-			return (mid);
-		else if (array[mid] > value)
-			r = mid - 1;
+		printf("Searching in array: ");
+		for (i = left; i < right; i++)
+			printf("%d, ", array[i]);
+		printf("%d\n", array[i]);
+
+		i = left + (right - left) / 2;
+		if (array[i] == value)
+			return (i);
+		if (array[i] > value)
+			right = i - 1;
 		else
-			l = mid + 1;
+			left = i + 1;
 	}
+
 	return (-1);
 }
